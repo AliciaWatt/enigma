@@ -7,7 +7,7 @@ describe Convert do
     @key = '02715'
     @date = '040895'
     @cipher = Cipher.new(@key, @date)
-    @convert = Convert.new(@message, @cipher)
+    @convert = Convert.new(@cipher)
   end
 
   describe 'initialize' do
@@ -15,7 +15,6 @@ describe Convert do
       expect(@convert).to be_a(Convert)
     end
    it 'has attributes' do
-     expect(@convert.message).to eq(@message)
      expect(@convert.cipher).to be(Cipher)
      expect(@convert.alphabet).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y","z", " "])
    end
@@ -118,7 +117,7 @@ describe 'methods' do
 
     describe '#encrypt' do
       it 'returns a string' do
-        expect(@convert.encrypt).to be_a(string)
+        expect(@convert.encrypt('hello world')).to be_a(String)
       end
       it 'returns an encrypted string'
       expect(@convert.encrypt('hello world')).to eq('keder ohulw')

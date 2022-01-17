@@ -3,8 +3,7 @@ require './lib/cipher'
 class Convert
   attr_accessor :message, :cipher, :letter_message, :index_message, :alphabet
 
-  def initialize(message, cipher)
-    @message = message
+  def initialize(cipher)
     @cipher = cipher
     @alphabet = ('a'..'z').to_a << ''
   end
@@ -46,11 +45,11 @@ class Convert
     unshifted
   end
 
-  def encrypt(message = @message)
+  def encrypt(message)
     index_message = build_index_message(message)
     shift(index_message).map{|index| @alphabet[index]}.join('')
   end
-  def decrypt(message = @message)
+  def decrypt(message)
     index_message = build_index_message(message)
     unshift(index_message).map{|index| @alphabet[index]}.join('')
   end
