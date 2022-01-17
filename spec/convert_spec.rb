@@ -117,7 +117,7 @@ describe 'methods' do
 
     describe '#encrypt' do
       it 'returns a string' do
-        expect(@convert.encrypt('hello world')).to be_a(String)
+        expect(@convert.encrypt('hello world!')).to be_a(String)
       end
       it 'returns an encrypted string'
       expect(@convert.encrypt('hello world')).to eq('keder ohulw')
@@ -129,6 +129,24 @@ describe 'methods' do
       end
       it 'returns a decrypted string' do
         expect(@convert.decrypt('keder ohulw')).to eq('hello world')
+      end
+    end
+    describe '#encrypt_message' do
+      it 'returns a string' do
+        expect(@convert.encrypt_message('H_llo W0rld.')).to be_a(String)
+      end
+      it 'returns encrypted string' do
+        expect(@convert.encrypt_message('hello world!')).to eq('keder ohulw')
+        expect(@convert.encrypt_message('H_llo W0rld.')).to eq('Ke_der O0hulw.')
+      end
+    end
+    describe '#decrypt_message' do
+      it 'returns a string' do
+        expect(@convert.decrypt_message('H_llo W0rld.')).to be_a(String)
+      end
+      it 'returns decrypted string' do
+        expect(@encoder.decrypt_message('keder ohulw')).to eq('hello world'))
+        expect(@encoder.decrypt_message('Ke_der O0hulw.')).to eq('H_llo W0rld.'))
       end
     end
   end
