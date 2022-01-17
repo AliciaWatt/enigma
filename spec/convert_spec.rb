@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require './lib/convert'
 require './lib/cipher'
 
@@ -119,8 +122,9 @@ describe 'methods' do
       it 'returns a string' do
         expect(@convert.encrypt('hello world!')).to be_a(String)
       end
-      it 'returns an encrypted string'
+      it 'returns an encrypted string' do
       expect(@convert.encrypt('hello world')).to eq('keder ohulw')
+      end
     end
 
     describe '#decrypt' do
@@ -145,8 +149,8 @@ describe 'methods' do
         expect(@convert.decrypt_message('H_llo W0rld.')).to be_a(String)
       end
       it 'returns decrypted string' do
-        expect(@encoder.decrypt_message('keder ohulw')).to eq('hello world'))
-        expect(@encoder.decrypt_message('Ke_der O0hulw.')).to eq('H_llo W0rld.'))
+        expect(@encoder.decrypt_message('keder ohulw')).to eq('hello world')
+        expect(@encoder.decrypt_message('Ke_der O0hulw.')).to eq('H_llo W0rld.')
       end
     end
   end

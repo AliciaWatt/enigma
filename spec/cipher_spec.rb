@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require './cipher'
 
 describe Cipher do
