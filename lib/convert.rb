@@ -54,4 +54,20 @@ class Convert
     index_message = build_index_message(message)
     unshift(index_message).map{|index| @alphabet[index]}.join('')
   end
+
+  def finish_message(new, original)
+    finished_message = []
+    original.chars.each_with_object(i=0) do |char|
+      if valid?(char.downcase) && upcase?(char)
+        finished_message << new.chars[i].upcase
+        i += 1
+      elsif valid?(char.downcase)
+        finished_message << new.chars[i]
+        i += 1
+      else
+        finished_message << char
+      end
+    end
+    finished_message.join('')
+  end
 end
