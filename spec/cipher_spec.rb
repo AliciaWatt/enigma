@@ -34,7 +34,7 @@ describe Cipher do
       it 'returns an array of integers' do
         expect(@cipher.calc_keys.all?{|v|v.class == Integer}).to eq(true)
       end
-      it 'returns correct offsets' do
+      it 'returns correct keys' do
         expect(@cipher.calc_keys).to eq([2,27,71,15])
       end
     end

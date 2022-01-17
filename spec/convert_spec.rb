@@ -6,7 +6,7 @@ require './lib/cipher'
 
 describe Convert do
   before (:each) do
-    @message = 'hello world'
+    @message = 'hello world!'
     @key = '02715'
     @date = '040895'
     @cipher = Cipher.new(@key, @date)
@@ -18,7 +18,7 @@ describe Convert do
       expect(@convert).to be_a(Convert)
     end
    it 'has attributes' do
-     expect(@convert.cipher).to be(Cipher)
+     expect(@convert.cipher).to be(@cipher)
      expect(@convert.alphabet).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y","z", " "])
    end
 end
@@ -108,13 +108,13 @@ describe 'methods' do
         expect(@convert.finish_message('keder ohulw!', @message)).to be_a(String)
       end
       it 'returns a string with correct uppercase' do
-        expect(@convert.finish_message('keder ohulw',"Hello world")).to eq('keder ohulw!')
+        expect(@convert.finish_message('keder ohulw!',"Hello world")).to eq('Keder ohulw')
       end
       it 'returns a string with original punctuation' do
         expect(@convert.finish_message('keder ohulw', 'hello world!')).to eq('keder ohulw!')
       end
       it 'returns a string with og punctuation and uppercase letters' do
-        expect(@convert.finish_message('keder ohulw', 'H_llo W0rld.')).to eq('Ke_der O0hulw.')
+        expect(@convert.finish_message('keder ohulw', 'He_llo W0orld.')).to eq('Ke_der O0hulw.')
       end
     end
 
@@ -137,20 +137,20 @@ describe 'methods' do
     end
     describe '#encrypt_message' do
       it 'returns a string' do
-        expect(@convert.encrypt_message('H_llo W0rld.')).to be_a(String)
+        expect(@convert.encrypt_message('He_llo W0orld.')).to be_a(String)
       end
       it 'returns encrypted string' do
         expect(@convert.encrypt_message('hello world!')).to eq('keder ohulw')
-        expect(@convert.encrypt_message('H_llo W0rld.')).to eq('Ke_der O0hulw.')
+        expect(@convert.encrypt_message('He_llo W0orld.')).to eq('Ke_der O0hulw.')
       end
     end
     describe '#decrypt_message' do
       it 'returns a string' do
-        expect(@convert.decrypt_message('H_llo W0rld.')).to be_a(String)
+        expect(@convert.decrypt_message('He_llo W0orld..')).to be_a(String)
       end
       it 'returns decrypted string' do
-        expect(@encoder.decrypt_message('keder ohulw')).to eq('hello world')
-        expect(@encoder.decrypt_message('Ke_der O0hulw.')).to eq('H_llo W0rld.')
+        expect(@convert.decrypt_message('keder ohulw')).to eq('hello world')
+        expect(@convert.decrypt_message('Ke_der O0hulw.')).to eq('He_llo W0orld.')
       end
     end
   end
