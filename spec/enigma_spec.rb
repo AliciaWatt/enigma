@@ -51,13 +51,13 @@ require './lib/convert'
         message_mock = double('message_mock')
         allow(message_mock).to receive(:encrypt).and_return(@cyphertext)
         expected = @cyphertext
-        expect(enigma.encrypt(message_mock, @key, @date)[:encryption]).to eq(expected)
+        expect(@enigma.encrypt(message_mock, @key, @date)[:encryption]).to eq(expected)
       end
     end
 
     describe '#decrypt' do
       it 'returns a hash' do
-        expect(enigma.decrypt(@cyphertext, @key, @date)).to be_a(Hash)
+        expect(@enigma.decrypt(@cyphertext, @key, @date)).to be_a(Hash)
       end
       it 'returns a has with correct keys' do
         expected = [:decryption, :key, :date]
@@ -70,10 +70,10 @@ require './lib/convert'
         expect(@enigma.decrypt(@cyphertext, @key, @date)[:date]).to eq(@date)
       end
       it 'returns a string as decryption' do
-        expect(enigma.decrypt(@cyphertext, @key, @date)[:decryption]).to be_a(String)
+        expect(@enigma.decrypt(@cyphertext, @key, @date)[:decryption]).to be_a(String)
       end
       it 'returns correct decryption' do
-        expect(enigma.decrypt(@cyphertext, @key, @date)[:decryption]).to eq(@message)
+        expect(@enigma.decrypt(@cyphertext, @key, @date)[:decryption]).to eq(@message)
       end
     end
   end
