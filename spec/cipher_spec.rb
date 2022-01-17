@@ -17,23 +17,22 @@ describe Cipher do
       expect(@cipher.shifts).to be_a(Array)
     end
     it 'initializes an array of shifts' do
-      allow(@enigma).to receive(:calc_shifts).and_return([1,2,3,4])
-      expect(@cipher.shifts).to eq(@enigma.calc_shifts)
+      expect(@cipher.shifts).to eq([3,27,73,20])
     end
   end
 
   describe 'methods' do
     before(:each) do
     end
-    describe '#keys_from_key' do
+    describe '#calc_keys' do
       it 'returns an array' do
-        expect(@cipher.keys_from_key).to be_a(Array)
+        expect(@cipher.calc_keys).to be_a(Array)
       end
       it 'returns an array of integers' do
-        expect(@cipher.keys_from_key.all?{|v|v.class = Integer}).to eq(true)
+        expect(@cipher.calc_keys.all?{|v|v.class == Integer}).to eq(true)
       end
       it 'returns correct offsets' do
-        expect(@cipher.keys_from_key).to eq([2,27,71,15])
+        expect(@cipher.calc_keys).to eq([2,27,71,15])
       end
     end
 
@@ -42,10 +41,10 @@ describe Cipher do
         expect(@cipher.calc_offsets).to be_a(Array)
       end
       it 'returns an array of integers' do
-        expect(@cipher.calc_offsets.all?{|v|v.class = Integer}).to eq(true)
+        expect(@cipher.calc_offsets.all?{|v|v.class == Integer}).to eq(true)
       end
       it 'returns correct offsets' do
-        expect(@cipher.calc_offsets).to eq([6,6,4,1])
+        expect(@cipher.calc_offsets).to eq([1,0,2,5])
       end
     end
     describe '#calc_shifts' do
@@ -53,10 +52,10 @@ describe Cipher do
         expect(@cipher.calc_shifts).to be_a(Array)
       end
       it 'returns an array of integers' do
-        expect(@cipher.calc_shifts.all?{|v|v.class = Integer}).to eq(true)
+        expect(@cipher.calc_shifts.all?{|v|v.class == Integer}).to eq(true)
       end
       it 'returns correct offsets' do
-        expect(@cipher.calc_shifts).to eq([8,33,75,16])
+        expect(@cipher.calc_shifts).to eq([3,27,73,20])
       end
     end
   end
