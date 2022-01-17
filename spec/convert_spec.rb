@@ -34,6 +34,16 @@ describe 'methods' do
     end
   end
 
+  describe '#upcase?' do
+    it 'returns true if character is not lowercase' do
+      expect(@convert.upcase?('A')).to eq(true)
+      expect(@convert.upcase?('!')).to eq(true)
+    end
+    it 'returns false if character is lowercase' do
+      expect(@convert.upcase?('a')).to eq(false)
+    end
+  end
+
   describe '#scrub' do
     it 'removes non alphabet characters' do
       expect(@convert.scrub('h&ll* w0r_ld.')).to eq('hello world')

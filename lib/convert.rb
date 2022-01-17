@@ -1,7 +1,7 @@
 require './lib/cipher'
 
 class Convert
-  attr_reader :message, :cipher, :letter_message, :index_message, :alphabet
+  attr_accessor :message, :cipher, :letter_message, :index_message, :alphabet
 
   def initialize(message, cipher)
     @message = message
@@ -11,6 +11,10 @@ class Convert
 
   def valid?(char)
     alphabet.include?(char)
+  end
+
+  def upcase?(char)
+    char == char.upcase
   end
 
   def scrub(message)
