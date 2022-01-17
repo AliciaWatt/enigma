@@ -1,21 +1,18 @@
-# require 'simplecov'
-# Simplecov.start
-
 require './lib/enigma'
 require './lib/message'
+require './lib/cipher'
+require './lib/convert'
 
  RSpec.describe Enigma do
  	before(:each) do
  		@enigma = Enigma.new
  	end
-  it 'exists' do
-    expect(@enigma).to be_instance_of(Enigma)
-  end
- 	it 'has attributes' do
- 		expect(@enigma.message).to eq(nil)
-    expect(@enigma.key).to eq(nil)
-    expect(@enigma.date).to eq(nil)
- 	end
+    it 'exists' do
+     expect(@enigma).to be_instance_of(Enigma)
+    end
+ 	  it 'has attributes' do
+ 	  end
+
 
   describe 'methods' do
     before(:each) do
@@ -23,7 +20,15 @@ require './lib/message'
       @key = '02715'
       @date = '040895'
       @cyphertext = double('cyphertext')
-      allow(@cyphertext).to receive(:decrypt).and_return(@message) 
+      allow(@cyphertext).to receive(:decrypt).and_return(@message)
+    end
+    describe '#today' do
+      it 'returns a string' do
+        expect(@enigma.today).to be_a(String)
+      end
+      it 'returns correct date' do
+        expect(enigma.today).to eq('160122')
+      end
     end
     describe '#encrypt' do
       it 'returns a hash' do
@@ -72,4 +77,4 @@ require './lib/message'
       end
     end
   end
- end
+end
