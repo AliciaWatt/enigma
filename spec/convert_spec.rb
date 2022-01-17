@@ -19,7 +19,7 @@ describe Convert do
     end
    it 'has attributes' do
      expect(@convert.cipher).to be(Cipher)
-     expect(@convert.alphabet).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y","z", " "])
+     expect(@convert.alphabet).to eq(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y","z", " "])
    end
 end
 
@@ -48,13 +48,13 @@ describe 'methods' do
 
   describe '#scrub' do
     it 'removes non alphabet characters' do
-      expect(@convert.scrub('h&ll* w0r_ld.')).to eq('hello world')
+      expect(@convert.scrub('he&ll*o wo0r_ld.')).to eq('hello world')
     end
     it 'returns lowercase' do
       expect(@convert.scrub('HELLO World')).to eq('hello world')
     end
     it 'returns correct message' do
-      expect(@convert.scrub('h&Ll* w0r_ld.')).to eq('hello world')
+      expect(@convert.scrub('he&ll*o wo0r_ld.')).to eq('hello world')
     end
   end
 

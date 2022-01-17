@@ -4,8 +4,8 @@ class Convert
   attr_accessor :message, :cipher, :letter_message, :index_message, :alphabet
 
   def initialize(cipher)
-    @cipher = cipher
-    @alphabet = ('a'..'z').to_a << ''
+    @cipher = Cipher
+    @alphabet = ("a".."z").to_a << " "
   end
 
   def valid?(char)
@@ -74,5 +74,5 @@ class Convert
   end
   def decrypt_message(message)
     finish_message(decrypt(message), message)
-  end 
+  end
 end

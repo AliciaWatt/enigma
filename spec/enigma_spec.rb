@@ -35,7 +35,7 @@ require './lib/convert'
     end
     describe '#encrypt' do
       it 'returns a hash' do
-        expect(enigma.encrypt(@message, @key, @date)).to eq(Hash)
+        expect(@enigma.encrypt(@message, @key, @date)).to eq(Hash)
       end
       it 'returns a hash with correct keys' do
         expected = [:encryption, :key, :date]
