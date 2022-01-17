@@ -66,8 +66,7 @@ class Convert
       else
         finished_message << char
       end
-    end
-    finished_message.join('')
+    end.join('')
   end
   def encrypt_message(message)
     finish_message(encrypt(message), message)

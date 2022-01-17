@@ -33,6 +33,16 @@ require './lib/convert'
         expect(enigma.today).to eq('160122')
       end
     end
+
+    describe 'random_key' do
+      it 'generates a string' do
+        expect(@enigma.random_key).to be_a(String)
+      end
+      it 'generates a 5 character string' do
+        expect(@enigma.random_key.chars.count).to eq(5)
+      end
+    end
+    
     describe '#encrypt' do
       it 'returns a hash' do
         expect(@enigma.encrypt(@message, @key, @date)).to eq(Hash)
