@@ -25,23 +25,7 @@ require './lib/convert'
       @cyphertext = double('cyphertext')
       allow(@cyphertext).to receive(:decrypt).and_return(@message)
     end
-    describe '#today' do
-      it 'returns a string' do
-        expect(@enigma.today).to be_a(String)
-      end
-      it 'returns correct date' do
-        expect(@enigma.today).to eq('170122')
-      end
-    end
 
-    describe 'random_key' do
-      it 'generates a string' do
-        expect(@enigma.random_key).to be_a(String)
-      end
-      it 'generates a 5 character string' do
-        expect(@enigma.random_key.chars.count).to eq(5)
-      end
-    end
 
     describe '#encrypt' do
       it 'returns a hash' do

@@ -25,8 +25,6 @@ describe Cipher do
   end
 
   describe 'methods' do
-    before(:each) do
-    end
     describe '#calc_keys' do
       it 'returns an array' do
         expect(@cipher.calc_keys).to be_a(Array)
