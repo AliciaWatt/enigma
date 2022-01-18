@@ -2,9 +2,10 @@ require './lib/cipher'
 
 class Convert
   attr_accessor :message, :cipher, :letter_message, :index_message, :alphabet
+  @@alphabet = ("a".."z").to_a << " "
 
   def initialize(cipher)
-    @cipher = Cipher
+    @cipher = cipher
     @alphabet = ("a".."z").to_a << " "
   end
 
@@ -13,6 +14,7 @@ class Convert
   end
 
   def upcase?(char)
+    return false if char == ' '
     char == char.upcase
   end
 
@@ -32,7 +34,7 @@ class Convert
   def shift(index_message)
     shifted = []
     index_message.each_with_index do [letter_index, index]
-      shifted << (letter_index + @cipher.shifts[index % 4])%27
+      shifted << (letter_message + @cipher.shifts[index % 4])%27
     end
     shifted
   end
@@ -55,19 +57,14 @@ class Convert
   end
 
   def finish_message(new, original)
-    finished_message = []
-    original.chars.each_with_object(i=0) do |char|
-      if valid?(char.downcase) && upcase?(char)
-        finished_message << new.chars[i].upcase
-        i += 1
-      elsif valid?(char.downcase)
-        finished_message << new.chars[i]
-        i += 1
+    new_chars = new.chars
+    original.chars.each_with_object(finished_message = []) do |char|
+      if valid?(char.downcase)
+        finished_message << (upcase?(char) ? new_chars.shift.upcase : new_chars.shift)
       else
         finished_message << char
       end
-    end
-    finished_message.join('')
+    end.join('')
   end
   def encrypt_message(message)
     finish_message(encrypt(message), message)

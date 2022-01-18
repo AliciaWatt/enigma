@@ -2,7 +2,7 @@ require 'simplecov'
 SimpleCov.start
 
 require './lib/enigma'
-require './lib/message'
+# require './lib/message'
 require './lib/cipher'
 require './lib/convert'
 
@@ -30,9 +30,19 @@ require './lib/convert'
         expect(@enigma.today).to be_a(String)
       end
       it 'returns correct date' do
-        expect(enigma.today).to eq('160122')
+        expect(@enigma.today).to eq('170122')
       end
     end
+
+    describe 'random_key' do
+      it 'generates a string' do
+        expect(@enigma.random_key).to be_a(String)
+      end
+      it 'generates a 5 character string' do
+        expect(@enigma.random_key.chars.count).to eq(5)
+      end
+    end
+
     describe '#encrypt' do
       it 'returns a hash' do
         expect(@enigma.encrypt(@message, @key, @date)).to eq(Hash)
@@ -51,10 +61,13 @@ require './lib/convert'
         expect(@enigma.encrypt(@message, @key, @date)[:encryption]).to be_a(String)
       end
       it 'returns correct encryption' do
-        message_mock = double('message_mock')
-        allow(message_mock).to receive(:encrypt).and_return(@cyphertext)
-        expected = @cyphertext
-        expect(@enigma.encrypt(message_mock, @key, @date)[:encryption]).to eq(expected)
+        message_1 = 'Hello World!'
+        expect(@enigma.encrypt(message_1, @key, @date)[:encryption]).to eq('Keder Ohulw')
+      end
+      it "can use the default date of today" do
+        allow(@enigma).to receive(:today).and_return("170122")
+        message_1 = 'Hello World!'
+        expect(@enigma.encrypt(message_1, @key)[:encryption]).to eq('')
       end
     end
 
